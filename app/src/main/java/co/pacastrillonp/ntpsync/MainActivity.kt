@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.pacastrillonp.ntpsync.ui.ActualTime
+import co.pacastrillonp.ntpsync.ui.ClockScreenNtp
 import co.pacastrillonp.ntpsync.ui.theme.NtpSyncTheme
 import co.pacastrillonp.ntpsync.util.difInMilliseconds
 import kotlinx.coroutines.CoroutineScope
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Column(modifier = Modifier.fillMaxSize()) {
-                        ActualTime()
+                        ClockScreenNtp()
                         Spacer(modifier = Modifier.size(16.dp))
                         Button(
                             onClick = {
@@ -87,8 +88,8 @@ class MainActivity : ComponentActivity() {
             }
 
             LaunchedEffect(true) {
-                val coroutineScope = CoroutineScope(Dispatchers.Default)
-                val targetDate = "17:35:00"
+                val coroutineScope = CoroutineScope(Dispatchers.IO)
+                val targetDate = "17:55:00"
                 coroutineScope.launch {
 
                     difInMilliseconds(targetDate)?.let { milliseconds ->
