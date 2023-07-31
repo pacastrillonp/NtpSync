@@ -16,7 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import co.pacastrillonp.ntpsync.util.getCurrentTime
+import co.pacastrillonp.ntpsync.util.getCurrentTimeFromNtp
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -26,14 +26,13 @@ import java.util.Locale
 @ExperimentalMaterial3Api
 @Composable
 fun ClockScreenNtp() {
-    // Estado para almacenar la hora actualizada
+
     var currentTime by remember { mutableStateOf<Date?>(null) }
 
-    // Función para actualizar la hora cada 10 segundos
     LaunchedEffect(true) {
         while (true) {
-            currentTime = getCurrentTime()
-            delay(200) // 10 segundos
+            currentTime = getCurrentTimeFromNtp()
+            delay(200)
         }
     }
 

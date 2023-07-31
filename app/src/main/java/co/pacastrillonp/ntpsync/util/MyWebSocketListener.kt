@@ -1,25 +1,28 @@
 package co.pacastrillonp.ntpsync.util
 
-import okhttp3.*
+import android.util.Log
+import okhttp3.Response
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 
 class MyWebSocketListener : WebSocketListener() {
     override fun onOpen(webSocket: WebSocket, response: Response) {
         super.onOpen(webSocket, response)
-        // Se ha abierto la conexión WebSocket
+        Log.d("🛸 onOpen", response.message)
     }
 
     override fun onMessage(webSocket: WebSocket, text: String) {
         super.onMessage(webSocket, text)
-        // Se ha recibido un mensaje del WebSocket
+        Log.d("🛸 onMessage", text)
     }
 
     override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
         super.onClosed(webSocket, code, reason)
-        // Se ha cerrado la conexión WebSocket
+        Log.d("🛸 onClosed", reason)
     }
 
     override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
         super.onFailure(webSocket, t, response)
-        // Hubo un error en la conexión WebSocket
+        Log.d("🛸 onFailure", t.message ?: "")
     }
 }
